@@ -37,8 +37,13 @@ app.controller('userCtrl', function($scope, $http){
     }
     
     $scope.login = function(){
-        console.log($scope.username);
-        console.log($scope.password);
+        var data = $.param({
+            username: $scope.username
+        });
+        $http.post("http://sonjoseph.website/heartstrong_backend/login.php", data, config).then(function(res){
+            console.log(res.data);
+            window.location = window.location + "\mock.html";
+        });
     }
     
 });
