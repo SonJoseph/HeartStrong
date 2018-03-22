@@ -4,8 +4,8 @@ require 'connect.php';
 $password = md5($_POST["password"]);
 
 $checkUsername = "SELECT COUNT(*) FROM Users WHERE Username = '".$_POST["username"]."'";
-$ct = mysqli_query($db, $checkUsername);
-$ct->fetch_row()[0];
+$result = mysqli_query($db, $checkUsername);
+$ct = $result->fetch_assoc()["COUNT(*)"];
 
 if($ct == 1){
    echo "username taken";
