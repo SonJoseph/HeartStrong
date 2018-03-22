@@ -9,19 +9,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-<script src="controllers/navigation.js"></script>
+<script src="controllers/user.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, width=device-width">
-        <title>mock navigation screen</title>
-    </head>
-    <body ng-app="navigationApp" ng-controller="navigationCtrl">
-        <div class="container-fluid">
-            
-        </div>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>Blank App</title>
+</head>
+
+<body ng-app="userApp" ng-controller="userCtrl">
+    <nav class="nav" id="navPage">
+      <ul>
+        <li><a href="gratitude.html">Gratitude Journal</a></li>
+        <li><a href="aims.html">Aims</a></li>
+        <li><a href="https://www.myuncchart.org/">My Chart</a></li>
+        <li><a href="">Weight and Vitals</a></li>
+        <li><a href="">Medicine Log</a></li>
+      </ul>
+    </nav>
+</body>
+
+
 </html>

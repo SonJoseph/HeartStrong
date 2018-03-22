@@ -29,10 +29,12 @@ app.controller('userCtrl', function($scope, $http){
             firstname: $scope.firstname,
             lastname: $scope.lastname,
             age: $scope.age,
-            address: $scope.address
+            address: $scope.address,
+            username: $scope.username,
+            password: $scope.password
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/register.php", data, config).then(function(res){
-            
+            console.log(res.data);
         });
     }
     
@@ -42,7 +44,6 @@ app.controller('userCtrl', function($scope, $http){
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/login.php", data, config).then(function(res){
             console.log(res.data);
-            window.location = window.location + "\mock.html";
         });
     }
     
