@@ -37,8 +37,11 @@ app.controller('userCtrl', function($scope, $http){
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/register.php", data, config).then(function(res){
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> e7bca5fd3c2472eb3b3b9fc6bd5f04f025e367c7
             console.log(res.data);
             if(res.data=="user created"){
                 $scope.show('#loginForm');
@@ -47,6 +50,9 @@ app.controller('userCtrl', function($scope, $http){
                 console.log($scope.errorMsg);
                 $scope.show('#errorMsg');
             }
+<<<<<<< HEAD
+>>>>>>> e7bca5fd3c2472eb3b3b9fc6bd5f04f025e367c7
+=======
 >>>>>>> e7bca5fd3c2472eb3b3b9fc6bd5f04f025e367c7
         });
     }
