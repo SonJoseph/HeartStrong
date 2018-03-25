@@ -7,9 +7,11 @@ app.controller('userCtrl', function($scope, $http){
         switch(element_id) {
             case "#registerForm":
                 $("#loginForm").hide();
+                $("#errorMsg").hide();
                 break;
             case "#loginForm":
                 $("#registerForm").hide();
+                $("#errorMsg").hide();
                 break;
         }
     }
@@ -29,20 +31,35 @@ app.controller('userCtrl', function($scope, $http){
             firstname: $scope.firstname,
             lastname: $scope.lastname,
             age: $scope.age,
-            address: $scope.address
+            address: $scope.address,
+            username: $scope.username,
+            password: $scope.password
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/register.php", data, config).then(function(res){
-            
+            console.log(res.data);
+            if(res.data=="user created"){
+                $scope.show('#loginForm');
+            }else{
+                $scope.errorMsg = res.data;
+                console.log($scope.errorMsg);
+                $scope.show('#errorMsg');
+            }
         });
     }
     
     $scope.login = function(){
         var data = $.param({
-            username: $scope.username
+            username: $scope.username,
+            password: $scope.password
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/login.php", data, config).then(function(res){
-            console.log(res.data);
-            window.location = window.location + "\mock.html";
+            if(res.data == "logged in!"){
+                window.location.replace("/nav.html");
+            }else{
+                $scope.errorMsg = res.data;
+                console.log($scope.errorMsg);
+                $scope.show('#errorMsg');
+            }
         });
     }
     

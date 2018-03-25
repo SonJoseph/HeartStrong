@@ -14,14 +14,25 @@
 
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, width=device-width">
-        <title>mock navigation screen</title>
-    </head>
-    <body ng-app="navigationApp" ng-controller="navigationCtrl">
-        <div class="container-fluid">
-            
-        </div>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>HeartStrong</title>
+</head>
+
+<body ng-app="navigationApp" ng-controller="navigationCtrl">
+    <p ng-bind="welcome"></p>
+    <nav class="nav" id="navPage">
+      <ul>
+        <li><a href="gratitude.html">Gratitude Journal</a></li>
+        <li><a href="aims.html">Aims</a></li>
+        <li><a href="https://www.myuncchart.org/">My Chart</a></li>
+        <li><a href="">Weight and Vitals</a></li>
+        <li><a href="">Medicine Log</a></li>
+      </ul>
+    </nav>
+    <button type="button" onclick="logout();">Logout</button>
+</body>
+
+
 </html>

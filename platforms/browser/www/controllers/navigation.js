@@ -18,7 +18,11 @@ app.controller('navigationCtrl', function($scope, $http){
     }
     
     var user = getCookie('user');
-    console.log(user);
+    $scope.welcome = "Welcome to Heartstrong, "+user+"!";
     
 
 });
+
+function logout(){
+        window.location.replace("/");
+}
