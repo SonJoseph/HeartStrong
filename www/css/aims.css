@@ -1,0 +1,13 @@
+label {
+    float: left;
+}
+
+input {
+    width: 100%;
+    box-sizing:border-box;
+}
+
+span {
+    display: block;
+    overflow: hidden;
+}

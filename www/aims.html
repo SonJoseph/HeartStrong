@@ -1,8 +1,39 @@
+<!DOCTYPE html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Angular JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<!--ADD CONTROLLER
+<script src="controllers/navigation.js"></script>
+-->
+<script type="text/javascript" src="cordova.js"></script>
+
 <html lang="en">
 
-What are you working for?<br>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="initial-scale=1, width=device-width">
+      <title>HeartStrong</title>
+  </head>
 
+  <body ng-app="userApp" ng-controller="aimsCtrl">
+    <!--Default to View Aims With Add Aim Button-->
+    <form action="addAim.php" method="post">
+      <h3>What are you working for?</h3><br>
+      <span>
+        <input type="text" ng-model="atext" name="aimInput"><br>
+      </span>
+      <input type="submit">
+    </form>
 
-<li><a href="nav.html">Back to Navigation</a></li>
+    <li><a href="nav.html">Back to Navigation</a></li>
+
+  </body>
 
 </html>
