@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 <script src="controllers/user.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <html lang="en">
   <head>
@@ -18,15 +19,24 @@
       <meta name="viewport" content="initial-scale=1, width=device-width">
       <title>HeartStrong</title>
   </head>
-  <!--write meds controller! -->
-  <body ng-app="userApp" ng-controller="medsCtrl">
-    <!--Default to View Aims With Add Aim Button-->
+  <!--write vitals controller! -->
+  <body ng-app="userApp" ng-controller="vitalsCtrl">
+    <!--Navigation bar-->
+    <div id="nav-placeholder">
+    </div>
+
+    <script>
+    $(function(){
+      $("#nav-placeholder").load("navbar.html");
+    });
+    </script>
+    <!--end of Navigation bar-->
+
     <div class="container-fluid">
-      <form id="medsForm" >
-        <h3>Make sure you take your medicines at the right time of day!</h3><br>
+      <form id="insertVitalsForm" >
+        <h3>Track Your Weight and Vitals Here!</h3><br>
       </form>
 
-      <li><a href="nav.html">Back to Navigation</a></li>
     </div>
   </body>
 

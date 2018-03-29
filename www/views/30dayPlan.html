@@ -2,6 +2,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <style>
     li{
@@ -22,6 +23,16 @@
     </head>
     <body>
         <div class="container-fluid">
+          <!--Navigation bar-->
+          <div id="nav-placeholder">
+          </div>
+
+          <script>
+          $(function(){
+            $("#nav-placeholder").load("navbar.html");
+          });
+          </script>
+          <!--end of Navigation bar-->
             <ul> <!-- these will be in a navagation bar -->
                 <li onclick="show(0)">Week 0</li>
                 <img id="week0" src="/images/week0.jpg" alt="week 0 image">
@@ -35,7 +46,7 @@
                 <img id="week4" src="/images/week1.jpg" alt="week 4 image">
             </ul>
             <br>
-            <a href="/nav.html"><p> Back to navigation</p></a>
+            <a href="/views/nav.html"><p> Back to navigation</p></a>
         </div>
     </body>
     <script type="text/javascript">
@@ -44,7 +55,7 @@
                 $('#week'+num).hide();
             }else{
                 $('#week'+num).show();
-                for (i = 0; i < 5; i++) { 
+                for (i = 0; i < 5; i++) {
                     if(i == num){
                         continue;
                     }else{

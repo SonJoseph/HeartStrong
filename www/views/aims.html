@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 <script src="controllers/user.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <html lang="en">
   <head>
@@ -20,15 +21,28 @@
   </head>
 
   <body ng-app="userApp" ng-controller="aimsCtrl">
+    <!--Navigation bar-->
+    <div id="nav-placeholder">
+    </div>
+
+    <script>
+    $(function(){
+      $("#nav-placeholder").load("navbar.html");
+    });
+    </script>
+    <!--end of Navigation bar-->
+
+
     <!--Default to View Aims With Add Aim Button-->
     <div class="container-fluid">
       <form id="aimViewForm" >
+        <h3>Every day you're getting closer to your goals!</h3><br>
         <button type="button" ng-click="switchForm('#newAimForm')">Add A New Aim</button>
       </form>
 
 
       <form id="newAimForm" style="display:none">
-    <!--<form id="newAimForm" action="scripts/addAim.php" method="post" style="display:none">-->
+      <!--<form id="newAimForm" action="scripts/addAim.php" method="post" style="display:none">-->
         <h3>What are you working for?</h3><br>
         <span>
           <input type="text" ng-model="aimInput"><br>
@@ -39,7 +53,6 @@
 
       </form>
 
-      <li><a href="nav.html">Back to Navigation</a></li>
     </div>
   </body>
 

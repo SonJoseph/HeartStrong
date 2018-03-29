@@ -77,6 +77,10 @@ app.controller('aimsCtrl', function($scope, $http) {
       }
  }
 
+ $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
+
+ });
+
  var config = {
      headers : {
          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -87,7 +91,7 @@ app.controller('aimsCtrl', function($scope, $http) {
      var data = $.param({
          aimInput: $scope.firstname,
      });
-     $http.post("http://sonjoseph.website/heartstrong_backend/register.php", data, config).then(function(res){
+     $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
        console.log();
      });
  }

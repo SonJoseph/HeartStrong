@@ -2,7 +2,7 @@
 require 'connect.php';
 
 
-$text = '$_POST["aimInput"]';
+$text = ($_POST["aimInput"]);
 
 #Get ID from users, auto increment aimnumber (after posting works)
 $aimID = 1;
