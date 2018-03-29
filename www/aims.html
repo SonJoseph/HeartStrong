@@ -9,13 +9,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-<!--ADD CONTROLLER
-<script src="controllers/navigation.js"></script>
--->
+<script src="controllers/user.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 
 <html lang="en">
-
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="initial-scale=1, width=device-width">
@@ -24,16 +21,26 @@
 
   <body ng-app="userApp" ng-controller="aimsCtrl">
     <!--Default to View Aims With Add Aim Button-->
-    <form action="addAim.php" method="post">
-      <h3>What are you working for?</h3><br>
-      <span>
-        <input type="text" ng-model="atext" name="aimInput"><br>
-      </span>
-      <input type="submit">
-    </form>
+    <div class="container-fluid">
+      <form id="aimViewForm" >
+        <button type="button" ng-click="switchForm('#newAimForm')">Add A New Aim</button>
+      </form>
 
-    <li><a href="nav.html">Back to Navigation</a></li>
 
+      <form id="newAimForm" style="display:none">
+    <!--<form id="newAimForm" action="scripts/addAim.php" method="post" style="display:none">-->
+        <h3>What are you working for?</h3><br>
+        <span>
+          <input type="text" ng-model="aimInput"><br>
+        </span>
+        <!--<input class="button" name="submit" value="Submit Aim" type="submit">-->
+        <button type="button" ng-click="addAim()">Submit Aim</button>
+        <button type="button" ng-click="switchForm('#aimViewForm')">Go Back to Aims List</button>
+
+      </form>
+
+      <li><a href="nav.html">Back to Navigation</a></li>
+    </div>
   </body>
 
 </html>

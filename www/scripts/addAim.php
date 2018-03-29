@@ -1,9 +1,16 @@
 <?php
-
 require 'connect.php';
 
-$sql = "INSERT INTO Aims (PatientID, AimNumber, AimText) VALUES ('"1"','"2"',".$_POST["aimtext"].")";
 
+$text = '$_POST["aimInput"]';
+
+#Get ID from users, auto increment aimnumber (after posting works)
+$aimID = 1;
+$aimNumber = 2;
+
+$insert = "INSERT INTO `Aims`(`ID`, `AimNumber`, `AimText`) VALUES ('$aimID','$aimNumber','$text')");
 $result = mysqli_query($db, $sql);
+
+
 mysqli_close($db);
 ?>

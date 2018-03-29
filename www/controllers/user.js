@@ -1,7 +1,6 @@
 var app = angular.module('userApp', []);
 
 app.controller('userCtrl', function($scope, $http){
-    
     $scope.show = function(element_id){
         $(element_id).show();
         switch(element_id) {
@@ -16,15 +15,15 @@ app.controller('userCtrl', function($scope, $http){
         }
     }
     $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
-        
+
     });
-    
+
     var config = {
         headers : {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
         }
     }
-    
+
     $scope.register = function(){
         // use $.param jQuery function to serialize data from JSON
         var data = $.param({
@@ -46,7 +45,7 @@ app.controller('userCtrl', function($scope, $http){
             }
         });
     }
-    
+
     $scope.login = function(){
         var data = $.param({
             username: $scope.username,
@@ -62,5 +61,36 @@ app.controller('userCtrl', function($scope, $http){
             }
         });
     }
-    
+
+});
+
+app.controller('aimsCtrl', function($scope, $http) {
+  $scope.switchForm = function(element_id){
+      $(element_id).show();
+      switch(element_id) {
+          case "#newAimForm":
+              $("#aimViewForm").hide();
+              break;
+          case "#aimViewForm":
+              $("#newAimForm").hide();
+              break;
+      }
+ }
+
+ var config = {
+     headers : {
+         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+     }
+ }
+
+ $scope.addAim = function(){
+     var data = $.param({
+         aimInput: $scope.firstname,
+     });
+     $http.post("http://sonjoseph.website/heartstrong_backend/register.php", data, config).then(function(res){
+       console.log();
+     });
+ }
+
+
 });
