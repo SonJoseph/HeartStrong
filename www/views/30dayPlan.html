@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<style>
+    li{
+        cursor: pointer;
+        color: blue;
+        font-weight: bold;
+        list-style-type: none;
+    }
+    img{
+        display:none;
+    }
+</style>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>HeartStrong</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <ul> <!-- these will be in a navagation bar -->
+                <li onclick="show(0)">Week 0</li>
+                <img id="week0" src="/images/week0.jpg" alt="week 0 image">
+                <li onclick="show(1)">Week 1</li>
+                <img id="week1" src="/images/week1.jpg" alt="week 1 image">
+                <li onclick="show(2)">Week 2</li>
+                <img id="week2" src="/images/week2.jpg" alt="week 2 image">
+                <li onclick="show(3)">Week 3</li>
+                <img id="week3" src="/images/week1.jpg" alt="week 3 image">
+                <li onclick="show(4)">Week 4</li>
+                <img id="week4" src="/images/week1.jpg" alt="week 4 image">
+            </ul>
+            <br>
+            <a href="/nav.html"><p> Back to navigation</p></a>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function show(num){
+            if ($('#week'+num).css('display') == 'block'){
+                $('#week'+num).hide();
+            }else{
+                $('#week'+num).show();
+                for (i = 0; i < 5; i++) { 
+                    if(i == num){
+                        continue;
+                    }else{
+                        $('#week'+i).hide();
+                    }
+                }
+            }
+        }
+    </script>
+</html>
