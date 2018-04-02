@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Angular JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script src="/controllers/user.js"></script>
+<script type="text/javascript" src="/cordova.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<html lang="en">
+
+  <head>
+    body {
+        font-family: "Lato", sans-serif;
+    }
+
+    .homeNav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+  </head>
+
+
+  <body>
+
+    <div id="homeNav" class="homeNav">
+      <a href="/views/gratitude.html">Gratitude Journal</a>
+      <a href="/views/aims.html">Aims</a>
+      <a href="https://www.myuncchart.org/">My Chart</a>
+      <a href="/views/vitals.html">Weight and Vitals</a>
+      <a href="/views/meds.html">Medicine Log</a>
+      <a href="/views/30dayPlan.html">30 Day Plan</a>
+    </div>
+
+  </body>
+
+</html>

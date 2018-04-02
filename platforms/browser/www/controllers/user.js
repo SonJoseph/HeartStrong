@@ -53,7 +53,7 @@ app.controller('userCtrl', function($scope, $http){
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/login.php", data, config).then(function(res){
             if(res.data == "logged in!"){
-                window.location.replace("/views/aims.html");
+                window.location.replace("/views/home.html");
             }else{
                 $scope.errorMsg = res.data;
                 console.log($scope.errorMsg);
