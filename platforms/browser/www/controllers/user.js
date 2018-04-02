@@ -14,9 +14,6 @@ app.controller('userCtrl', function($scope, $http){
                 break;
         }
     }
-    $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
-
-    });
 
     var config = {
         headers : {

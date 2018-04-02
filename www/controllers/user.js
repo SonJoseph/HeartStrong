@@ -1,3 +1,19 @@
+function getCookie(cname) { //returns value of cookie
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 var app = angular.module('userApp', []);
 
 app.controller('userCtrl', function($scope, $http){
@@ -14,9 +30,6 @@ app.controller('userCtrl', function($scope, $http){
                 break;
         }
     }
-    $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
-
-    });
 
     var config = {
         headers : {
@@ -65,36 +78,39 @@ app.controller('userCtrl', function($scope, $http){
 });
 
 app.controller('aimsCtrl', function($scope, $http) {
-  $scope.switchForm = function(element_id){
-      $(element_id).show();
-      switch(element_id) {
-          case "#newAimForm":
-              $("#aimViewForm").hide();
-              break;
-          case "#aimViewForm":
-              $("#newAimForm").hide();
-              break;
-      }
- }
+    $scope.switchForm = function(element_id){
+        $(element_id).show();
+        switch(element_id) {
+            case "#newAimForm":
+                $("#aimViewForm").hide();
+                break;
+            case "#aimViewForm":
+                $("#newAimForm").hide();
+                break;
+        }
+    }
 
- $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
+    $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
 
- });
+    });
 
- var config = {
-     headers : {
-         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-     }
- }
+    var config = {
+        headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+    }
 
- $scope.addAim = function(){
-     var data = $.param({
-         aimInput: $scope.firstname,
-     });
-     $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
-       console.log();
-     });
- }
+    $scope.addAim = function(){
+        var data = $.param({
+            aimInput: $scope.firstname,
+        });
+        $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
+            console.log();
+        });
+    }
+    
+    var user = getCookie('user');
+    console.log(user);
 
 
 });
