@@ -17,34 +17,45 @@
 <html lang="en">
 
   <head>
-    body {
-        font-family: "Lato", sans-serif;
-    }
+    <style>
+      body { width: 100%; height: 100%; }
+      ul {
+          list-style-type: none;
+          padding: 0;
+          border: 1px solid #ddd;
+      }
 
-    .homeNav {
-        height: 100%;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-    }
+      a {
+        color: black;
+      }
+
+      ul li {
+          text-align: center;
+          background-color: rgba(201, 76, 76, 0.3);
+          padding: 8px 16px;
+          border-bottom: 1px solid #ddd;
+      }
+
+      ul li:last-child {
+          border-bottom: none
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HeartStrong</title>
   </head>
 
 
   <body>
 
     <div id="homeNav" class="homeNav">
-      <a href="/views/gratitude.html">Gratitude Journal</a>
-      <a href="/views/aims.html">Aims</a>
-      <a href="https://www.myuncchart.org/">My Chart</a>
-      <a href="/views/vitals.html">Weight and Vitals</a>
-      <a href="/views/meds.html">Medicine Log</a>
-      <a href="/views/30dayPlan.html">30 Day Plan</a>
+      <ul>
+        <li><a href="/views/gratitude.html">Gratitude Journal</a></li>
+        <li><a href="/views/aims.html">Aims</a></li>
+        <li><a href="https://www.myuncchart.org/">My Chart</a></li>
+        <li><a href="/views/vitals.html">Weight and Vitals</a></li>
+        <li><a href="/views/meds.html">Medicine Log</a></li>
+        <li><a href="/views/30dayPlan.html">30 Day Plan</a></li>
+      </ul>
     </div>
 
   </body>
