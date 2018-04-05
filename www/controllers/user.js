@@ -102,13 +102,14 @@ app.controller('aimsCtrl', function($scope, $http) {
 
     $scope.addAim = function(){
         var data = $.param({
-            aimInput: $scope.firstname,
+            aimTitle: $scope.aimTitle,
+            aimInput: $scope.aimInput,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
             console.log();
         });
     }
-    
+
     var user = getCookie('user');
     console.log(user);
 

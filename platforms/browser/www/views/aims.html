@@ -43,14 +43,13 @@
 
 
       <form id="newAimForm" style="display:none">
-      <!--<form id="newAimForm" action="scripts/addAim.php" method="post" style="display:none">-->
-        <h3>What are you working for?</h3><br>
-        <span>
-          <input type="text" ng-model="aimInput"><br>
-            <!-- use text area instead of input -->
-        </span>
-        <!--<input class="button" name="submit" value="Submit Aim" type="submit">-->
-        <button type="button" ng-click="addAim()">Submit Aim</button>
+        <!--Add photo capabilities-->
+        <h4>Input a title for your aim, then the full description</h4>
+        <input type='text' ng-model='aimTitle'><br>
+        <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
+
+        <!--<input type='file' ng-model="aimImage" onchange="readURL(event)"><br>-->
+        <button type="button" ng-click="addAim(); switchForm('#aimViewForm')">Submit Aim</button><br>
         <button type="button" ng-click="switchForm('#aimViewForm')">Go Back to Aims List</button>
 
       </form>
