@@ -110,6 +110,12 @@ app.controller('aimsCtrl', function($scope, $http) {
         });
     }
 
+    $scope.displayAims = function() {
+      $http.post("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
+          console.log();
+      });
+    }
+
     var user = getCookie('user');
     console.log(user);
 

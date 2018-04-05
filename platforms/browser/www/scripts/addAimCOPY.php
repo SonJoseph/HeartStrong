@@ -7,8 +7,13 @@ $aimTitle = ($_POST["aimTitle"]);
 $aimText = ($_POST["aimInput"]);
 #$aimPhoto = ($_POST["aimPhoto"]);
 
-$insert = "INSERT INTO `Aims`(`PatientID`, `AimName`, `AimText`) VALUES ('$aimID','$aimTitle','$aimText')";
-$result = mysqli_query($db, $insert);
+if (empty($aimTitle) or empty($aimText)) {
+  echo "You can't leave name or description empty!";
+} else {
+  $insert = "INSERT INTO `Aims`(`PatientID`, `AimName`, `AimText`) VALUES ('$aimID','$aimTitle','$aimText')";
+  $result = mysqli_query($db, $insert);
+}
+
 
 
 mysqli_close($db);
