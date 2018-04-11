@@ -35,10 +35,13 @@
 
 
     <!--Default to View Aims With Add Aim Button-->
+    <p id="errorMsg" style="color:red; display:none" ng-bind="errorMsg"></p>
     <div class="container-fluid">
       <form id="aimViewForm" >
         <h3>Every day you're getting closer to your goals!</h3><br>
         <div data-ng-controller="aimsCtrl" data-ng-init="displayAims()"></div>
+        <script> window.onload=displayAims() ; </script>
+        <div id="aimsTable"></div>
         <button type="button" ng-click="switchForm('#newAimForm')">Add A New Aim</button>
       </form>
 
@@ -50,7 +53,7 @@
         <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
 
         <!--<input type='file' ng-model="aimImage" onchange="readURL(event)"><br>-->
-        <button type="button" ng-click="addAim(); switchForm('#aimViewForm')">Submit Aim</button><br>
+        <button type="button" ng-click="addAim()">Submit Aim</button><br>
         <button type="button" ng-click="switchForm('#aimViewForm')">Go Back to Aims List</button>
 
       </form>

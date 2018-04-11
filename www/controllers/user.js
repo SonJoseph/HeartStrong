@@ -83,9 +83,11 @@ app.controller('aimsCtrl', function($scope, $http) {
         switch(element_id) {
             case "#newAimForm":
                 $("#aimViewForm").hide();
+                $("#errorMsg").hide();
                 break;
             case "#aimViewForm":
                 $("#newAimForm").hide();
+                $("#errorMsg").hide();
                 break;
         }
     }
@@ -106,7 +108,17 @@ app.controller('aimsCtrl', function($scope, $http) {
             aimInput: $scope.aimInput,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
-            console.log();
+          if(res.data == "Success!"){
+              //set forms back to empty if the user wants to add another aim
+              $( '#newAimForm' ).each(function(){
+                this.reset();
+              });
+              $scope.switchForm('#aimViewForm');
+          }else{
+              $scope.errorMsg = res.data;
+              console.log($scope.errorMsg);
+              $scope.switchForm('#errorMsg');
+          }
         });
     }
 
@@ -114,8 +126,10 @@ app.controller('aimsCtrl', function($scope, $http) {
       var data = $.param({
 
       });
-      $http.post("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
+      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
           console.log();
+          var table = $htmlTable;
+          $scope.aimsTable = table;
       });
     }
 
