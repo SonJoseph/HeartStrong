@@ -135,6 +135,8 @@ app.controller('aimsCtrl', function($scope, $http) {
 
     var user = getCookie('user');
     console.log(user);
+});
 
-
+app.controller('vitalsCtrl', function($scope, $http){
+    
 });

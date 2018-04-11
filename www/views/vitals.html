@@ -12,34 +12,33 @@
 <script src="../controllers/user.js"></script>
 <script type="text/javascript" src="../cordova.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!-- full calendar -->
+<link rel='stylesheet' href='../fullcalendar-3.9.0/fullcalendar.css' />
+<script src='../fullcalendar-3.9.0/lib/moment.min.js'></script>
+<script src='../fullcalendar-3.9.0/fullcalendar.js'></script>
 
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="initial-scale=1, width=device-width">
-      <title>HeartStrong</title>
-  </head>
-  <!--write vitals controller! -->
-  <body ng-app="userApp" ng-controller="vitalsCtrl">
-    <!--Navigation bar-->
-    <div id="nav-placeholder">
-    </div>
-
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>HeartStrong</title>
+    </head>
+    <!--write vitals controller! -->
+    <body ng-app="userApp" ng-controller="vitalsCtrl">
+        <div id="nav-placeholder"></div>
+        <div class="container-fluid">
+            <h3>Track Your Weight and Vitals Here!</h3><br>
+            <div id='calendar'></div>
+        </div>
+    </body>
     <script>
-    $(function(){
-      $("#nav-placeholder").load("navbar.html");
-    });
+        $(function(){
+            // page is now ready, initialize the calendar...
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+            })
+            $("#nav-placeholder").load("navbar.html");
+        });
     </script>
-    <!--end of Navigation bar-->
-
-    <div class="container-fluid">
-      <form id="insertVitalsForm" >
-        <h3>Track Your Weight and Vitals Here!</h3><br>
-          
-          <!-- show weight throughout the week -->
-      </form>
-
-    </div>
-  </body>
 
 </html>
