@@ -111,6 +111,9 @@ app.controller('aimsCtrl', function($scope, $http) {
     }
 
     $scope.displayAims = function() {
+      var data = $.param({
+
+      });
       $http.post("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
           console.log();
       });

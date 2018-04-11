@@ -10,7 +10,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<<<<<<< HEAD
+<script src="./controllers/user.js"></script>
+=======
 <script src="../controllers/user.js"></script>
+>>>>>>> df3c8ebc8781f136f15ef57d6fbf048b47bb0acb
 <script type="text/javascript" src="/cordova.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
@@ -38,9 +42,7 @@
     <div class="container-fluid">
       <form id="aimViewForm" >
         <h3>Every day you're getting closer to your goals!</h3><br>
-        <script>
-        window.onload="displayAims()" ;
-        </script>
+        <div data-ng-controller="aimsCtrl" data-ng-init="displayAims()"></div>
         <button type="button" ng-click="switchForm('#newAimForm')">Add A New Aim</button>
       </form>
 
