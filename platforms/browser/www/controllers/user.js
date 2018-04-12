@@ -108,17 +108,17 @@ app.controller('aimsCtrl', function($scope, $http) {
             aimInput: $scope.aimInput,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
-          if(res.data == "Success!"){
-              //set forms back to empty if the user wants to add another aim
-              $( '#newAimForm' ).each(function(){
-                this.reset();
-              });
-              $scope.switchForm('#aimViewForm');
-          }else{
-              $scope.errorMsg = res.data;
-              console.log($scope.errorMsg);
-              $scope.switchForm('#errorMsg');
-          }
+            if(res.data == "Success!"){
+                //set forms back to empty if the user wants to add another aim
+                $( '#newAimForm' ).each(function(){
+                    this.reset();
+                });
+                $scope.switchForm('#aimViewForm');
+            }else{
+                $scope.errorMsg = res.data;
+                console.log($scope.errorMsg);
+                $scope.switchForm('#errorMsg');
+            }
         });
     }
 
@@ -139,6 +139,8 @@ app.controller('aimsCtrl', function($scope, $http) {
 
 app.controller('vitalsCtrl', function($scope, $http){
 
+
+
 });
 
 app.controller('journalCtrl', function($scope, $http){
@@ -147,13 +149,18 @@ app.controller('journalCtrl', function($scope, $http){
 
 
 
-  $scope.chooseMood = function(choice) {
-    mood = choice;
-  }
+    var mood = happy;
+    $scope.chooseMood = function(choice) {
+        mood = choice;
+    }
 
-  $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
+    $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, config).then(function(res){
+        console.log();
+        var data = $.param({
 
-  });
+        });
+
+    });
 
   var config = {
       headers : {
