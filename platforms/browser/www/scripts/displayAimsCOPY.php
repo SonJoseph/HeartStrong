@@ -13,7 +13,7 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     $htmlTable .= "<tr><td>".$row["AimName"]."</td></td>";
   }
-  $htmlTable .= "</tr>"
+  $htmlTable .= "</tr>";
 } else {
   echo "You haven't input any aims yet!";
 }

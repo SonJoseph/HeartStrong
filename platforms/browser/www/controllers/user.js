@@ -122,13 +122,13 @@ app.controller('aimsCtrl', function($scope, $http) {
         });
     }
 
-    $scope.displayAims = function() {
+    $scope.showAims = function() {
       var data = $.param({
 
       });
       $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
           console.log();
-          var table = $htmlTable;
+          var table = $arrival_time;
           $scope.aimsTable = table;
       });
     }
@@ -138,5 +138,23 @@ app.controller('aimsCtrl', function($scope, $http) {
 });
 
 app.controller('vitalsCtrl', function($scope, $http){
-    
+
+});
+
+app.controller('journalCtrl', function($scope, $http) {
+
+  var mood = happy;
+  $scope.chooseMood = function(choice) {
+    mood = choice;
+  }
+
+  $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, config).then(function(res){
+      console.log();
+      var data = $.param({
+
+      });
+
+  });
+
+
 });

@@ -39,8 +39,7 @@
     <div class="container-fluid">
       <form id="aimViewForm" >
         <h3>Every day you're getting closer to your goals!</h3><br>
-        <div data-ng-controller="aimsCtrl" data-ng-init="displayAims()"></div>
-        <script> window.onload=displayAims() ; </script>
+        <script> window.onload="showAims()" ; </script>
         <div id="aimsTable"></div>
         <button type="button" ng-click="switchForm('#newAimForm')">Add A New Aim</button>
       </form>

@@ -5,19 +5,36 @@
 </head>
 
 <body>
-<!--Navigation bar-->
-<div id="nav-placeholder">
-</div>
+    <!--Navigation bar-->
+    <div id="nav-placeholder">
+    </div>
 
-<script>
-$(function(){
-  $("#nav-placeholder").load("navbar.html");
-});
-</script>
-<!--end of Navigation bar-->
+    <script>
+    $(function(){
+      $("#nav-placeholder").load("navbar.html");
+    });
+    </script>
+    <!--end of Navigation bar-->
 
-<h3>What are you grateful for today?</h3><br>
+    <h3>What are you grateful for today?</h3><br>
+    <!--Show date of current journal entry-->
+    <div id="date"></div>
+    <script>
+    var date = new Date();
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+    </script>
+    <!--End Date-->
 
+    <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
+    <h4> Which picture best describes your mood? </h4>
+    <button type="button" ng-click="chooseMood('happy')">Happy</button>
+    <button type="button" ng-click="chooseMood('neutral')">Neutral</button>
+    <button type="button" ng-click="chooseMood('nervous')">Nervous</button>
+    <button type="button" ng-click="chooseMood('sad')">Sad</button>
+    <button type="button" ng-click="chooseMood('angry')">Angry</button><br>
 
 
 </body>
