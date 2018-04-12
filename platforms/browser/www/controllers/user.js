@@ -128,7 +128,7 @@ app.controller('aimsCtrl', function($scope, $http) {
       });
       $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
           console.log();
-          var table = $arrival_time;
+          var table = data.property;
           $scope.aimsTable = table;
       });
     }
@@ -141,20 +141,38 @@ app.controller('vitalsCtrl', function($scope, $http){
 
 });
 
-app.controller('journalCtrl', function($scope, $http) {
+app.controller('journalCtrl', function($scope, $http){
 
-  var mood = happy;
+  var mood = '';
+
+
+
   $scope.chooseMood = function(choice) {
     mood = choice;
   }
 
-  $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, config).then(function(res){
-      console.log();
-      var data = $.param({
-
-      });
+  $http.get("http://sonjoseph.website/heartstrong_backend/connect.php").then(function(res){
 
   });
+
+  var config = {
+      headers : {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+      }
+  }
+
+
+
+  $scope.addEntry = function() {
+    var data = $.param({
+      journal: $scope.journalInput,
+    });
+
+    $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, mood, config).then(function(res){
+        console.log();
+
+    });
+  }
 
 
 });

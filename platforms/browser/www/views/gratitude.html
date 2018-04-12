@@ -4,7 +4,7 @@
 
 </head>
 
-<body>
+<body ng-app="userApp" ng-controller="journalCtrl">
     <!--Navigation bar-->
     <div id="nav-placeholder">
     </div>
@@ -28,13 +28,14 @@
     </script>
     <!--End Date-->
 
-    <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
-    <h4> Which picture best describes your mood? </h4>
+    <textarea rows="20" cols="50" ng-model="journalInput"></textarea><br>
+    <h4> Which best describes your mood? </h4>
     <button type="button" ng-click="chooseMood('happy')">Happy</button>
     <button type="button" ng-click="chooseMood('neutral')">Neutral</button>
     <button type="button" ng-click="chooseMood('nervous')">Nervous</button>
     <button type="button" ng-click="chooseMood('sad')">Sad</button>
     <button type="button" ng-click="chooseMood('angry')">Angry</button><br>
+    <button type="button" ng-click="addEntry()">Submit Entry</button><br>
 
 
 </body>

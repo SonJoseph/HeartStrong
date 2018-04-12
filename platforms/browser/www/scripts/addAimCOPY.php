@@ -12,7 +12,7 @@ if (empty($aimTitle) or empty($aimText)) {
 } else {
   $insert = "INSERT INTO `Aims`(`PatientID`, `AimName`, `AimText`) VALUES ('$aimID','$aimTitle','$aimText')";
   $result = mysqli_query($db, $insert);
-  echo 'Success!'
+  echo 'Success!';
 }
 
 
