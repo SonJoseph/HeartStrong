@@ -14,6 +14,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- full calendar -->
 <link rel='stylesheet' href='../fullcalendar-3.9.0/fullcalendar.css' />
+<link rel='stylesheet' href='../css/universal.css' />
 <script src='../fullcalendar-3.9.0/lib/moment.min.js'></script>
 <script src='../fullcalendar-3.9.0/fullcalendar.js'></script>
 
@@ -29,16 +30,62 @@
         <div class="container-fluid">
             <h3>Track Your Weight and Vitals Here!</h3><br>
             <div id='calendar'></div>
+            <a class="popup-trigger">Open Pop Up</a>
+
+            <div class="main">
+                This is an example of a minimal mobile-friendly modal window. It is developed without using a plugin and just a few lines of jQuery. Resize your browser to test how it behaves on mobile. <br><br> The functionality is very basic, so you would probably have to built upon it regarding your project needs. Feel free to use this script in any personal or commercial projects. To <a href="/create-responsive-popup-modal-window-jquery-no-plugin">download this demo</a>, please go to the main article on Stanhub.
+            </div>
+            <div class="popup">
+                Madrid is a city in Europe and the capital and largest city of Spain. The population of the city is almost 3.2 million and that of the Madrid metropolitan area, around 6.3 million. <br><br>It is the third-largest city in the European Union, after London and Berlin, and its metropolitan area is the third-largest in the European Union after Paris and London. The city spans a total of 604.3 km2 (233.3 sq mi).
+                <span class="popup-btn-close">close</span>
+            </div>
+            <script>
+                // page is now ready, initialize the calendar...
+                $('#calendar').fullCalendar({
+                    // put your options and callbacks here
+                    dayClick: function(date, jsEvent, view) {
+                        alert('Clicked on: ' + date.format());
+                        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                        alert('Current view: ' + view.name);
+                        // change the day's background color just for fun
+                        $(this).css('background-color', 'red');
+                    }
+                })
+                $("#nav-placeholder").load("navbar.html");
+                // Popup Window
+                var scrollTop = '';
+                var newHeight = '100';
+
+                $(window).bind('scroll', function() {
+                    scrollTop = $( window ).scrollTop();
+                    newHeight = scrollTop + 100;
+                });
+
+                $('.popup-trigger').click(function(e) {
+                    e.stopPropagation();
+                    if(jQuery(window).width() < 767) {
+                        $(this).after( $( ".popup" ) );
+                        $('.popup').show().addClass('popup-mobile').css('top', 0);
+                        $('html, body').animate({
+                            scrollTop: $('.popup').offset().top
+                        }, 500);   
+                    } else {
+                        $('.popup').removeClass('popup-mobile').css('top', newHeight).toggle();
+                    };
+                });
+
+                $('html').click(function() {
+                    $('.popup').hide();
+                });
+
+                $('.popup-btn-close').click(function(e){
+                    $('.popup').hide();
+                });
+
+                $('.popup').click(function(e){
+                    e.stopPropagation();
+                });
+            </script>
         </div>
     </body>
-    <script>
-        $(function(){
-            // page is now ready, initialize the calendar...
-            $('#calendar').fullCalendar({
-                // put your options and callbacks here
-            })
-            $("#nav-placeholder").load("navbar.html");
-        });
-    </script>
-
 </html>
