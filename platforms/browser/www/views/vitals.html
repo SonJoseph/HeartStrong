@@ -27,42 +27,52 @@
     <!--write vitals controller! -->
     <body ng-app="userApp" ng-controller="vitalsCtrl">
         <div id="nav-placeholder"></div>
+        <div class="popup">
+            <form>
+                Weight: <input type="text" name="weight"> 
+                <select>
+                    <option value="kg">Kg</option>
+                    <option value="lb">Lb</option>
+                </select>
+                <button type="button" ng-click="submitWeight">Submit</button>
+            </form>
+            <span class="popup-btn-close">close</span>
+        </div>
         <div class="container-fluid">
-            <h3>Track Your Weight and Vitals Here!</h3><br>
+            <a class="popup-trigger">Add today's weight</a>
             <div id='calendar'></div>
-<!--            <a class="popup-trigger">Open Pop Up</a>-->
-            <div class="popup">
-                Add your weight here
-                <span class="popup-btn-close">close</span>
-            </div>
             <script>
                 // page is now ready, initialize the calendar...
                 $('#calendar').fullCalendar({
                     // put your options and callbacks here
                     dayClick: function(date, jsEvent, view) {
-//                        alert('Clicked on: ' + date.format());
-//                        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-//                        alert('Current view: ' + view.name);
-//                        // change the day's background color just for fun
-                        $(this).css('background-color', 'red');
-                        $(this).click(function(e) {
-                            e.stopPropagation();
-                            if(jQuery(window).width() < 767) {
-                                $(this).after( $( ".popup" ) );
-                                $('.popup').show().addClass('popup-mobile').css('top', 0);
-                                $('html, body').animate({
-                                    scrollTop: $('.popup').offset().top
-                                }, 500);   
-                            } else {
-                                $('.popup').removeClass('popup-mobile').css('top', newHeight).toggle();
-                            };
-                        });
+                        //                        alert('Clicked on: ' + date.format());
+                        //                        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                        //                        alert('Current view: ' + view.name);
+                        //                        // change the day's background color just for fun
+                        //$(this).css('background-color', 'red');
                     }
                 })
+
+
                 $("#nav-placeholder").load("navbar.html");
+
                 // Popup Window
                 var scrollTop = '';
                 var newHeight = '100';
+
+                $(".popup-trigger").click(function(e) {
+                    e.stopPropagation();
+                    if(jQuery(window).width() < 767) {
+                        $(this).after( $( ".popup" ) );
+                        $('.popup').show().addClass('popup-mobile').css('top', 0);
+                        $('html, body').animate({
+                            scrollTop: $('.popup').offset().top
+                        }, 500);   
+                    } else {
+                        $('.popup').removeClass('popup-mobile').css('top', newHeight).toggle();
+                    };
+                });
 
                 $(window).bind('scroll', function() {
                     scrollTop = $( window ).scrollTop();
