@@ -78,14 +78,19 @@ app.controller('userCtrl', function($scope, $http){
 });
 
 app.controller('aimsCtrl', function($scope, $http) {
-    $scope.switchForm = function(element_id){
+
+    var user = getCookie('user');
+    console.log(user);
+
+
+    $scope.switchView = function(element_id){
         $(element_id).show();
         switch(element_id) {
             case "#newAimForm":
-                $("#aimViewForm").hide();
+                $("#aimView").hide();
                 $("#errorMsg").hide();
                 break;
-            case "#aimViewForm":
+            case "#aimView":
                 $("#newAimForm").hide();
                 $("#errorMsg").hide();
                 break;
@@ -106,6 +111,7 @@ app.controller('aimsCtrl', function($scope, $http) {
         var data = $.param({
             aimTitle: $scope.aimTitle,
             aimInput: $scope.aimInput,
+            username: user,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
             if(res.data == "Success!"){
@@ -113,28 +119,43 @@ app.controller('aimsCtrl', function($scope, $http) {
                 $( '#newAimForm' ).each(function(){
                     this.reset();
                 });
-                $scope.switchForm('#aimViewForm');
+                $scope.switchView('#aimViewForm');
             }else{
                 $scope.errorMsg = res.data;
                 console.log($scope.errorMsg);
-                $scope.switchForm('#errorMsg');
+                $scope.switchView('#errorMsg');
             }
         });
     }
 
+    //Get aims to dispay in AimView
+    //Need to pass username into php fn
     $scope.showAims = function() {
-      var data = $.param({
+      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", config).then(function(res){
+         console.log();
+         $scope.names = res.data;
+      });
 
-      });
-      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
-          console.log();
-          var table = data.property;
-          $scope.aimsTable = table;
-      });
     }
 
-    var user = getCookie('user');
-    console.log(user);
+    //Get full aim text/ picture to show when name clicked in AimView
+    $scope.getAim = function() {
+
+      var data = $.param({
+          aimTitle: $scope.aimTitle,
+          username: user,
+      });
+
+      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", config).then(function(res){
+          console.log();
+          $scope.aimText = res.data;
+      });
+
+    }
+
+    $scope.showAims();
+
+
 });
 
 app.controller('vitalsCtrl', function($scope, $http){

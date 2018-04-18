@@ -1,23 +1,24 @@
 <?php
 require 'connect.php';
 
-$sql = "SELECT AimName FROM Aims WHERE PatientID=1";
-$result = $conn->query($sql);
-$htmlTable = '<table border="1" cellspacing="0" cellpadding="2">
-              <tr>';
-$haveTable = 'no';
+$aimUser = ($_POST["username"]);
+
+$sql = "SELECT AimName FROM Aims WHERE Username=$aimUser";
+$result = mysqli_query($db, $sql);
+$names = array();
 
 
 if ($result->num_rows > 0) {
-  $haveTable = 'yes';
   while($row = $result->fetch_assoc()) {
-    $htmlTable .= "<tr><td>".$row["AimName"]."</td></td>";
+    $names[] = $row;
   }
-  $htmlTable .= "</tr>";
+  $sanitized = json_encode($names);
+  echo $sanitized;
 } else {
   echo "You haven't input any aims yet!";
 }
 
-mysqli_close($db);
 
+
+mysqli_close($db);
 ?>
