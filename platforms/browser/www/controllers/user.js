@@ -131,7 +131,11 @@ app.controller('aimsCtrl', function($scope, $http) {
     //Get aims to dispay in AimView
     //Need to pass username into php fn
     $scope.showAims = function() {
-      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", config).then(function(res){
+      var params = {
+        username: user
+      };
+
+      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", {config, params}).then(function(res){
          console.log();
          $scope.names = res.data;
       });

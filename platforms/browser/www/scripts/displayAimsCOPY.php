@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 
-$aimUser = ($_POST["username"]);
+$aimUser = ($_GET["username"]);
 
 $sql = "SELECT AimName FROM Aims WHERE Username=$aimUser";
 $result = mysqli_query($db, $sql);
