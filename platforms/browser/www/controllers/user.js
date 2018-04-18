@@ -16,7 +16,6 @@ function getCookie(cname) { //returns value of cookie
 
 var app = angular.module('userApp', []);
 
-// USER CONTROLLER
 app.controller('userCtrl', function($scope, $http){
     $scope.show = function(element_id){
         $(element_id).show();
@@ -78,16 +77,20 @@ app.controller('userCtrl', function($scope, $http){
 
 });
 
-//AIMS CONTROLLER
 app.controller('aimsCtrl', function($scope, $http) {
-    $scope.switchForm = function(element_id){
+
+    var user = getCookie('user');
+    console.log(user);
+
+
+    $scope.switchView = function(element_id){
         $(element_id).show();
         switch(element_id) {
             case "#newAimForm":
-                $("#aimViewForm").hide();
+                $("#aimView").hide();
                 $("#errorMsg").hide();
                 break;
-            case "#aimViewForm":
+            case "#aimView":
                 $("#newAimForm").hide();
                 $("#errorMsg").hide();
                 break;
@@ -108,6 +111,7 @@ app.controller('aimsCtrl', function($scope, $http) {
         var data = $.param({
             aimTitle: $scope.aimTitle,
             aimInput: $scope.aimInput,
+            username: user,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
             if(res.data == "Success!"){
@@ -115,42 +119,61 @@ app.controller('aimsCtrl', function($scope, $http) {
                 $( '#newAimForm' ).each(function(){
                     this.reset();
                 });
-                $scope.switchForm('#aimViewForm');
+                $scope.switchView('#aimViewForm');
             }else{
                 $scope.errorMsg = res.data;
                 console.log($scope.errorMsg);
-                $scope.switchForm('#errorMsg');
+                $scope.switchView('#errorMsg');
             }
         });
     }
 
+    //Get aims to dispay in AimView
+    //Need to pass username into php fn
     $scope.showAims = function() {
-        var data = $.param({
+      var params = {
+        username: user
+      };
 
-        });
-        $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", data, config).then(function(res){
-            console.log();
-            var table = data.property;
-            $scope.aimsTable = table;
-        });
+      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", {config, params}).then(function(res){
+         console.log();
+         $scope.names = res.data;
+      });
+
     }
 
-    var user = getCookie('user');
-    console.log(user);
+    //Get full aim text/ picture to show when name clicked in AimView
+    $scope.getAim = function() {
+
+      var data = $.param({
+          aimTitle: $scope.aimTitle,
+          username: user,
+      });
+
+      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", config).then(function(res){
+          console.log();
+          $scope.aimText = res.data;
+      });
+
+    }
+
+    $scope.showAims();
+
+
 });
 
-// VITALS CONTROLLER
 app.controller('vitalsCtrl', function($scope, $http){
 
 
 
 });
 
-// JOURNAL COUNTROLLER
 app.controller('journalCtrl', function($scope, $http){
 
-    var mood = '';
-    
+  var mood = '';
+
+
+
     var mood = happy;
     $scope.chooseMood = function(choice) {
         mood = choice;
@@ -164,23 +187,24 @@ app.controller('journalCtrl', function($scope, $http){
 
     });
 
-    var config = {
-        headers : {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-    }
+  var config = {
+      headers : {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+      }
+  }
 
 
-    $scope.addEntry = function() {
-        var data = $.param({
-            journal: $scope.journalInput,
-        });
 
-        $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, mood, config).then(function(res){
-            console.log();
+  $scope.addEntry = function() {
+    var data = $.param({
+      journal: $scope.journalInput,
+    });
 
-        });
-    }
+    $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, mood, config).then(function(res){
+        console.log();
+
+    });
+  }
 
 
 });
