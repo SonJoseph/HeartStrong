@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- jQuery(mobile) -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 <script src="../controllers/user.js"></script>
 <script type="text/javascript" src="../cordova.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- full calendar -->
 <link rel='stylesheet' href='../fullcalendar-3.9.0/fullcalendar.css' />
 <link rel='stylesheet' href='../css/universal.css' />
@@ -27,19 +25,19 @@
     <!--write vitals controller! -->
     <body ng-app="userApp" ng-controller="vitalsCtrl">
         <div id="nav-placeholder"></div>
-        <div class="popup">
+        <!--<div class="popup">-->
             <form>
-                Weight: <input type="text" name="weight"> 
-                <select>
+                Weight: <input type="text" ng-model="weight"> 
+                <select ng-model="unit">
                     <option value="kg">Kg</option>
                     <option value="lb">Lb</option>
                 </select>
-                <button type="button" ng-click="submitWeight">Submit</button>
+                <button type="button" ng-click="submitWeight()">Submit</button>
             </form>
-            <span class="popup-btn-close">close</span>
-        </div>
+<!--            <span class="popup-btn-close">close</span>-->
+        <!--</div>-->
         <div class="container-fluid">
-            <a class="popup-trigger">Add today's weight</a>
+<!--            <a class="popup-trigger">Add today's weight</a>-->
             <div id='calendar'></div>
             <script>
                 // page is now ready, initialize the calendar...
@@ -55,42 +53,42 @@
                 })
 
 
-                $("#nav-placeholder").load("navbar.html");
-
-                // Popup Window
-                var scrollTop = '';
-                var newHeight = '100';
-
-                $(".popup-trigger").click(function(e) {
-                    e.stopPropagation();
-                    if(jQuery(window).width() < 767) {
-                        $(this).after( $( ".popup" ) );
-                        $('.popup').show().addClass('popup-mobile').css('top', 0);
-                        $('html, body').animate({
-                            scrollTop: $('.popup').offset().top
-                        }, 500);   
-                    } else {
-                        $('.popup').removeClass('popup-mobile').css('top', newHeight).toggle();
-                    };
-                });
-
-                $(window).bind('scroll', function() {
-                    scrollTop = $( window ).scrollTop();
-                    newHeight = scrollTop + 100;
-                });
-
-
-                $('html').click(function() {
-                    $('.popup').hide();
-                });
-
-                $('.popup-btn-close').click(function(e){
-                    $('.popup').hide();
-                });
-
-                $('.popup').click(function(e){
-                    e.stopPropagation();
-                });
+               $("#nav-placeholder").load("navbar.html");
+//
+//                // Popup Window
+//                var scrollTop = '';
+//                var newHeight = '100';
+//
+//                $(".popup-trigger").click(function(e) {
+//                    e.stopPropagation();
+//                    if(jQuery(window).width() < 767) {
+//                        $(this).after( $( ".popup" ) );
+//                        $('.popup').show().addClass('popup-mobile').css('top', 0);
+//                        $('html, body').animate({
+//                            scrollTop: $('.popup').offset().top
+//                        }, 500);   
+//                    } else {
+//                        $('.popup').removeClass('popup-mobile').css('top', newHeight).toggle();
+//                    };
+//                });
+//
+//                $(window).bind('scroll', function() {
+//                    scrollTop = $( window ).scrollTop();
+//                    newHeight = scrollTop + 100;
+//                });
+//
+//
+//                $('html').click(function() {
+//                    $('.popup').hide();
+//                });
+//
+//                $('.popup-btn-close').click(function(e){
+//                    $('.popup').hide();
+//                });
+//
+//                $('.popup').click(function(e){
+//                    e.stopPropagation();
+//                });
             </script>
         </div>
     </body>
