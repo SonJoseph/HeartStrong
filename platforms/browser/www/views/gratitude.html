@@ -18,12 +18,13 @@
 <head>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, width=device-width" user-scalable="yes">
+  <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, user-scalable=yes"/>
   <title>HeartStrong</title>
 
 </head>
 
 <body ng-app="userApp" ng-controller="journalCtrl">
+
     <!--Navigation bar-->
     <div id="nav-placeholder">
     </div>
@@ -50,11 +51,12 @@
     <!--<div id="journalEntry">-->
       <textarea rows="20" cols="50" ng-model="journalInput"></textarea><br>
       <h4> Which best describes your mood? </h4>
-      <button type="button" ng-click="chooseMood('happy')">Happy</button>
-      <button type="button" ng-click="chooseMood('neutral')">Neutral</button>
-      <button type="button" ng-click="chooseMood('nervous')">Nervous</button>
-      <button type="button" ng-click="chooseMood('sad')">Sad</button>
-      <button type="button" ng-click="chooseMood('angry')">Angry</button><br>
+      <input type="image" id="happy" src="../images/Happy.png" width ="50" ng-click="chooseMood('happy')">
+      <input type="image" id="hopeful" src="../images/Hopeful.png" width ="50" ng-click="chooseMood('hopeful')">
+      <input type="image" id="worried" src="../images/Worried.png" width ="50" ng-click="chooseMood('worried')">
+      <input type="image" id="sad" src="../images/Sad.png" width ="50" ng-click="chooseMood('sad')">
+      <input type="image" id="angry" src="../images/Angry.png" width ="50" ng-click="chooseMood('angry')"><br>
+
       <button type="button" ng-click="addEntry()">Submit Entry</button><br>
     <!--</div>-->
 
