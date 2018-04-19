@@ -89,11 +89,19 @@ app.controller('aimsCtrl', function($scope, $http) {
             case "#newAimForm":
                 $("#aimView").hide();
                 $("#errorMsg").hide();
+                $("#fullAim").hide();
                 break;
             case "#aimView":
                 $("#newAimForm").hide();
                 $("#errorMsg").hide();
+                $("#fullAim").hide();
                 break;
+            case "#fullAim":
+                $("#aimView").hide();
+                $("#errorMsg").hide();
+                $("#newAimForm").hide();
+                break;
+
         }
     }
 
@@ -111,6 +119,7 @@ app.controller('aimsCtrl', function($scope, $http) {
         var data = $.param({
             aimTitle: $scope.aimTitle,
             aimInput: $scope.aimInput,
+            aimPhoto: $scope.aimImage,
             username: user,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
@@ -120,6 +129,7 @@ app.controller('aimsCtrl', function($scope, $http) {
                     this.reset();
                 });
                 $scope.switchView('#aimViewForm');
+
             }else{
                 $scope.errorMsg = res.data;
                 console.log($scope.errorMsg);
@@ -129,7 +139,7 @@ app.controller('aimsCtrl', function($scope, $http) {
     }
 
     //Get aims to dispay in AimView
-    //Need to pass username into php fn
+
     $scope.showAims = function() {
       var params = {
         username: user
@@ -143,16 +153,18 @@ app.controller('aimsCtrl', function($scope, $http) {
     }
 
     //Get full aim text/ picture to show when name clicked in AimView
-    $scope.getAim = function() {
+    $scope.getAim = function(aimName) {
 
-      var data = $.param({
-          aimTitle: $scope.aimTitle,
+      var params = {
+          aimTitle: aimName,
           username: user,
-      });
+      };
 
-      $http.get("http://sonjoseph.website/heartstrong_backend/displayAims.php", config).then(function(res){
+      $http.get("http://sonjoseph.website/heartstrong_backend/getFullAim.php", {config, params}).then(function(res){
           console.log();
+          $scope.switchView('#fullAim');
           $scope.aimText = res.data;
+
       });
 
     }

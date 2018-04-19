@@ -40,29 +40,34 @@
       <div id="aimView" >
         <h3>Every day you're getting closer to your goals!</h3><br>
         <ul>
-              <li ng-repeat = "n in names">{{n.AimName}}</li>
-        </ul>
+              <li ng-repeat = "n in names">
+                <var ng-model="aimName" ng-click="getAim(n.AimName); switchView('#fullAim')">{{n.AimName}}</var>
+                <!--<h4><a href="#" ng-click="getAim()">{{n.AimName}}</a></h4>-->
+              </li>
+        </ul><br>
 
         <button type="button" ng-click="switchView('#newAimForm')">Add A New Aim</button>
       </div>
 
       <!--Show full aim text/ picture when clicked-->
-      <div id="selectedAimDisplay">
+      <div id="fullAim" style="display:none">
+          <div id="aimText">{{aimText.AimText}}</div>
+          <button type="button" ng-click="switchView('#aimView')">Go Back</button>
+      </form>
+    </div>
 
-      </div>
 
-
-      <form id="newAimForm" style="display:none">
+      <div id="newAimForm" style="display:none">
         <!--Add photo capabilities-->
         <h4>Input a title for your aim, then the full description</h4>
         <input type='text' ng-model='aimTitle'><br>
         <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
 
-        <!--<input type='file' ng-model="aimImage" onchange="readURL(event)"><br>-->
+        <input type='file' name="aimImage"><br>
         <button type="button" ng-click="addAim()">Submit Aim</button><br>
         <button type="button" ng-click="switchView('#aimView')">Go Back to Aims List</button>
 
-      </form>
+      </div>
 
     </div>
   </body>
