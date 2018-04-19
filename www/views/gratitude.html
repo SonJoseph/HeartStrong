@@ -23,6 +23,13 @@
 
 </head>
 
+<style>
+  body  {
+      font-family: "Lato", sans-serif;
+  }
+</style>
+
+
 <body ng-app="userApp" ng-controller="journalCtrl">
 
     <!--Navigation bar-->
@@ -48,7 +55,7 @@
     </script>
     <!--End Date-->
 
-    <!--<div id="journalEntry">-->
+    <div id="journalEntry" class="input">
       <textarea rows="20" cols="50" ng-model="journalInput"></textarea><br>
       <h4> Which best describes your mood? </h4>
       <input type="image" id="happy" src="../images/Happy.png" width ="50" ng-click="chooseMood('happy')">
@@ -58,7 +65,7 @@
       <input type="image" id="angry" src="../images/Angry.png" width ="50" ng-click="chooseMood('angry')"><br>
 
       <button type="button" ng-click="addEntry()">Submit Entry</button><br>
-    <!--</div>-->
+    </div>
 
 
 </body>

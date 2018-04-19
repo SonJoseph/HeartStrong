@@ -21,6 +21,16 @@
       <title>HeartStrong</title>
   </head>
 
+  <style>
+  .view li {
+       padding: 8px 8px 8px 32px;
+       text-decoration: none;
+       font-size: 20px;
+       display: block;
+       transition: 0.3s;
+  }
+  </style>
+
   <body ng-app="userApp" ng-controller="aimsCtrl">
     <!--Navigation bar-->
     <div id="nav-placeholder">
@@ -37,7 +47,7 @@
     <!--Default to View Aims With Add Aim Button-->
     <p id="errorMsg" style="color:red; display:none" ng-bind="errorMsg"></p>
     <div class="container-fluid">
-      <div id="aimView" >
+      <div id="aimView" class="view">
         <h3>Every day you're getting closer to your goals!</h3><br>
         <ul>
               <li ng-repeat = "n in names">
