@@ -68,6 +68,7 @@ app.controller('userCtrl', function($scope, $http){
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/login.php", data, config).then(function(res){
             if(res.data == "logged in!"){
+                localStorage.user =("user",$scope.username);
                 window.location.replace("./views/home.html");
             }else{
                 $scope.errorMsg = res.data;
@@ -81,7 +82,7 @@ app.controller('userCtrl', function($scope, $http){
 
 app.controller('aimsCtrl', function($scope, $http) {
 
-    var user = getCookie('user');
+    var user = localStorage.getItem("user");
     console.log(user);
 
 
@@ -127,7 +128,7 @@ app.controller('aimsCtrl', function($scope, $http) {
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
             if(res.data == "Success!"){
                 //set forms back to empty if the user wants to add another aim
-                $( '#newAimForm' ).each(function(){
+                $( '#aimUserInput' ).each(function(){
                     this.reset();
                 });
                 $scope.switchView('#aimViewForm');
@@ -188,22 +189,13 @@ app.controller('vitalsCtrl', function($scope, $http){
 
 app.controller('journalCtrl', function($scope, $http){
 
-    var mood = '';
+    var user = localStorage.getItem("user");
+    console.log(user);
 
-
-
-    var mood = happy;
+    var mood = "";
     $scope.chooseMood = function(choice) {
         mood = choice;
     }
-
-    $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, config).then(function(res){
-        console.log();
-        var data = $.param({
-
-        });
-
-    });
 
     var config = {
         headers : {
@@ -213,16 +205,24 @@ app.controller('journalCtrl', function($scope, $http){
 
 
 
-    $scope.addEntry = function() {
+    $scope.addEntry = function(){
         var data = $.param({
+            username: user,
+
+            //username: user,
             journal: $scope.journalInput,
+            mood: mood,
         });
-
-        $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, mood, config).then(function(res){
+        $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, config).then(function(res){
             console.log();
-
+            if(res.data == "Success!"){
+                $( '#journalInput' ).each(function(){
+                    this.reset();
+                });
+            }else{
+                $scope.errorMsg = res.data;
+                console.log($scope.errorMsg);
+            }
         });
     }
-
-
 });

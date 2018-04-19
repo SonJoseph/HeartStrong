@@ -1,16 +1,22 @@
 <?php
 require 'connect.php';
 
-$aimID = 1;
+$user = ($_POST["username"]);
 $journalInput = ($_POST["journal"]);
 $mood = ($_POST["mood"]);
 
-if (empty($aimTitle) or $mood === null)) {
+if (empty($journalInput) or empty($mood)) {
   echo 'Please fill out the form and select a mood!';
 } else {
-  $insert = "INSERT INTO `JournalEntry`(`PatientID`, `JournalEntry`, `Mood`) VALUES ('$aimID','$aimTitle','$aimText')";
+  $insert = "INSERT INTO `sonjndtj_HeartStrong`.`Journals` (`Username`, `JournalEntry`, `Mood`) VALUES ('$user','$journalInput','$mood')";
   $result = mysqli_query($db, $insert);
-  echo 'Success!'
+  if (!$result) {
+    error_log("Nothing posted!");
+    echo("Error description: " . mysqli_error($db));
+  } else {
+    echo 'Success!';
+  }
+
 }
 
 

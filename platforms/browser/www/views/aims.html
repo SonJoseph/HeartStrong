@@ -60,9 +60,10 @@
       <div id="newAimForm" style="display:none">
         <!--Add photo capabilities-->
         <h4>Input a title for your aim, then the full description</h4>
-        <input type='text' ng-model='aimTitle'><br>
-        <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
-
+        <form id="aimUserInput">
+          <input type='text' ng-model='aimTitle'><br>
+          <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
+        </form>
         <input type='file' name="aimImage"><br>
         <button type="button" ng-click="addAim()">Submit Aim</button><br>
         <button type="button" ng-click="switchView('#aimView')">Go Back to Aims List</button>
