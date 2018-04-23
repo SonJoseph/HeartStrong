@@ -87,7 +87,6 @@ app.service('fileUpload', ['$http', function ($http) {
          fd.append('file', file);
          fd.append('name', name);
          fd.append('text', text);
-         console.log(text);
          fd.append('username', username);
          $http.post(uploadUrl, fd, {
              transformRequest: angular.identity,
@@ -148,6 +147,7 @@ app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
         var name = $scope.aimTitle;
         var text = $scope.aimInput;
         fileUpload.uploadFileToUrl(file, uploadUrl, name, text, user);
+        $scope.switchView('#aimView');
     }
 
     //Get aims to dispay in AimView
