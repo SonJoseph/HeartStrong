@@ -1,21 +1,3 @@
-function getCookie(cname) { //returns value of cookie
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-
-
 var app = angular.module('userApp', []);
 
 var config = {
@@ -98,6 +80,7 @@ app.controller('aimsCtrl', function($scope, $http) {
                 $("#newAimForm").hide();
                 $("#errorMsg").hide();
                 $("#fullAim").hide();
+                $scope.showAims();
                 break;
             case "#fullAim":
                 $("#aimView").hide();
@@ -126,12 +109,12 @@ app.controller('aimsCtrl', function($scope, $http) {
             username: user,
         });
         $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
-            if(res.data == "Success!"){
+            if(res.data == "Aim Added!"){
                 //set forms back to empty if the user wants to add another aim
                 $( '#aimUserInput' ).each(function(){
                     this.reset();
                 });
-                $scope.switchView('#aimViewForm');
+                $scope.switchView('#aimView');
 
             }else{
                 $scope.errorMsg = res.data;
