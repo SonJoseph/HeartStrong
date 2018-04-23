@@ -1,30 +1,33 @@
 <?php
 require 'connect.php';
 
-
+$target_dir = "./upload/";
 $aimUser = ($_POST["username"]);
-$aimTitle = ($_POST["aimTitle"]);
-$aimText = ($_POST["aimInput"]);
-$aimPhoto = ($_POST["aimPhoto"]);
+$aimTitle = ($_POST["name"]);
+$aimText = ($_POST["text"]);
+//$aimPhoto = ($_POST["aimPhoto"]);
+$target_file = $target_dir . basename($_FILES["file"]["name"]);
 
-$image = addslashes(file_get_contents($_FILES['aimPhoto']['tmp_name']));
-$image_name = addslashes($_FILES['aimPhoto']['name']);
+$checkTitle = "SELECT COUNT(*) FROM `Aims` WHERE AimName = '$aimTitle' AND Username = '$aimUser'";
+$titleCount = mysqli_query($db, $checkTitle);
 
+//Enforce unique names for aim retrieval
+#if ($titleCount) {
+#echo("You already have an aim with that name!");
+#} else {
+  if (empty($aimTitle) or empty($aimText)) {
+    echo "You can't leave name or description empty!";
+  } else {
+    $insert = "INSERT INTO `Aims`(`Username`, `AimName`, `AimText`, `AimImage`) VALUES ('$aimUser','$aimTitle','$aimText', '".basename($_FILES["file"]["name"])."')";
+    $result = mysqli_query($db, $insert);
+    if ($result) {
+      echo "Aim Added!";
+    } else {
+      echo("Error description: " . mysqli_error($db));
+    }
 
-if (empty($aimTitle) or empty($aimText)) {
-  echo "You can't leave name or description empty!";
-  $checkTitle = "SELECT COUNT(*) FROM `AIMS` WHERE AimName = '$aimUser'";
-  $ct = $result->fetch_assoc()["COUNT(*)"];
-
-}
-if ($ct == 1) {
-   echo "You already have an aim with that name!";
-} else {
-  $insert = "INSERT INTO `Aims`(`Username`, `AimName`, `AimText`, `AimImage`) VALUES ('$aimUser','$aimTitle','$aimText', '$image_name')";
-  $result = mysqli_query($db, $insert);
-  echo "Success!";
-}
-
+  }
+##}
 
 mysqli_close($db);
 ?>

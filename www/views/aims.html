@@ -29,6 +29,11 @@
        display: block;
        transition: 0.3s;
   }
+
+  .full {
+    font-size: 20px;
+  }
+
   </style>
 
   <body ng-app="userApp" ng-controller="aimsCtrl">
@@ -61,7 +66,7 @@
 
       <!--Show full aim text/ picture when clicked-->
       <div id="fullAim" style="display:none">
-          <div id="aimText">{{aimText.AimText}}</div>
+          <div id="aimText" class = "full">{{aimText.AimText}}</div>
           <button type="button" ng-click="switchView('#aimView')">Go Back</button>
       </form>
     </div>
@@ -72,9 +77,9 @@
         <h4>Input a title for your aim, then the full description</h4>
         <form id="aimUserInput">
           <input type='text' ng-model='aimTitle'><br>
-          <textarea rows="20" cols="50" ng-model="aimInput"></textarea><br>
+          <textarea type='text' rows="20" cols="50" ng-model="aimInput"></textarea><br>
         </form>
-        <input type='file' name="aimImage"><br>
+        <input type='file' file-model="aimImage" name="aimImage"><br>
         <button type="button" ng-click="addAim()">Submit Aim</button><br>
         <button type="button" ng-click="switchView('#aimView')">Go Back to Aims List</button>
 

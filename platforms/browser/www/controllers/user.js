@@ -80,7 +80,47 @@ app.controller('userCtrl', function($scope, $http){
 
 });
 
-app.controller('aimsCtrl', function($scope, $http) {
+
+//Listens for changes to input and change value in variable scope
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+            scope.$apply(function(){
+                modelSetter(scope, element[0].files[0]);
+            });
+        });
+    }
+   };
+}]);
+
+//Use when need to do fileUpload
+app.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl, name, text, username){
+         var fd = new FormData();
+         fd.append('file', file);
+         fd.append('name', name);
+         fd.append('text', text);
+         console.log(text);
+         fd.append('username', username);
+         $http.post(uploadUrl, fd, {
+             transformRequest: angular.identity,
+             headers: {'Content-Type': undefined,'Process-Data': false}
+         })
+         .success(function(){
+            console.log("Success");
+         })
+         .error(function(){
+            console.log("Not Success");
+         });
+     }
+ }]);
+
+app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $http, fileUpload) {
 
     var user = localStorage.getItem("user");
     console.log(user);
@@ -118,27 +158,13 @@ app.controller('aimsCtrl', function($scope, $http) {
         }
     }
 
-    $scope.addAim = function(){
-        var data = $.param({
-            aimTitle: $scope.aimTitle,
-            aimInput: $scope.aimInput,
-            aimPhoto: $scope.aimImage,
-            username: user,
-        });
-        $http.post("http://sonjoseph.website/heartstrong_backend/addAim.php", data, config).then(function(res){
-            if(res.data == "Success!"){
-                //set forms back to empty if the user wants to add another aim
-                $( '#aimUserInput' ).each(function(){
-                    this.reset();
-                });
-                $scope.switchView('#aimViewForm');
 
-            }else{
-                $scope.errorMsg = res.data;
-                console.log($scope.errorMsg);
-                $scope.switchView('#errorMsg');
-            }
-        });
+    $scope.addAim = function(){
+        var file = $scope.aimImage;
+        var uploadUrl = "http://sonjoseph.website/heartstrong_backend/addAim.php";
+        var name = $scope.aimTitle;
+        var text = $scope.aimInput;
+        fileUpload.uploadFileToUrl(file, uploadUrl, name, text, user);
     }
 
     //Get aims to dispay in AimView
@@ -175,7 +201,8 @@ app.controller('aimsCtrl', function($scope, $http) {
     $scope.showAims();
 
 
-});
+}]);
+
 
 app.controller('vitalsCtrl', function($scope, $http){
     $scope.submitWeight = function(){
