@@ -174,9 +174,14 @@ app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
 
       $http.get("http://sonjoseph.website/heartstrong_backend/getFullAim.php", {config, params}).then(function(res){
           console.log();
-          $scope.switchView('#fullAim');
           $scope.aimText = res.data;
+      });
 
+      $http.get("http://sonjoseph.website/heartstrong_backend/getAimImage.php", {config, params}).then(function(res){
+          console.log();
+          $scope.switchView('#fullAim');
+          $scope.aimImage = res.data;
+          console.log(res.data);
       });
 
     }
