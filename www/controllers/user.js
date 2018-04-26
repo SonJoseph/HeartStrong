@@ -1,4 +1,4 @@
-var app = angular.module('userApp', []);
+var app = angular.module('userApp', ['onsen']);
 
 var config = {
     headers : {
@@ -193,12 +193,35 @@ app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
 
 
 app.controller('vitalsCtrl', function($scope, $http){
+    $scope.weight;
+    $scope.unit;
+    
+    document.addEventListener('init', function(event) {
+        var page = event.target;
+        if (page.id === 'page1') {
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                dayClick: function(date, jsEvent, view) {
+                    $scope.date = date.format();
+                    document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: date.format()}});
+                }
+            });
+            $("#nav-placeholder").load("navbar.html");
+        } else if (page.id === 'page2') {
+            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+        }
+    });
+    
     $scope.submitWeight = function(){
-        console.log($scope.unit);
-        console.log($scope.weight);
-//        var data = $.param({
-//
-//        })
+        var data = $.param({
+            weight: $scope.weight,
+            unit: $scope.unit,
+            date: $scope.date,
+            username: localStorage.getItem("user")
+        })
+        $http.post("http://sonjoseph.website/heartstrong_backend/addWeight.php", data, config).then(function(res){
+            console.log(res);
+        });
     }
 });
 
