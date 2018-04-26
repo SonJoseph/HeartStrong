@@ -4,7 +4,7 @@ require 'connect.php';
 $aimTitle = ($_GET["aimTitle"]);
 $user = ($_GET["username"]);
 
-$sql = "SELECT AimText FROM Aims WHERE AimName='$aimTitle'";
+$sql = "SELECT AimText FROM Aims WHERE AimName='$aimTitle' AND Username='$user'";
 $result = mysqli_query($db, $sql);
 
 if (!$result) {

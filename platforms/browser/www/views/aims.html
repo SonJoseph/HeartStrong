@@ -62,7 +62,6 @@
         <ul>
               <li ng-repeat = "n in names">
                 <var ng-model="aimName" ng-click="getAim(n.AimName); switchView('#fullAim')">{{n.AimName}}</var>
-                <!--<h4><a href="#" ng-click="getAim()">{{n.AimName}}</a></h4>-->
               </li>
         </ul><br>
 
@@ -72,9 +71,9 @@
       <!--Show full aim text/ picture when clicked-->
       <div id="fullAim" style="display:none">
           <div id="aimText" class = "full">{{aimText.AimText}}</div>
+          <img ng-src="{{aimImage}}"/>
           <button type="button" ng-click="switchView('#aimView')">Go Back</button>
-<!--      </form>-->
-    </div>
+      </div>
 
 
       <div id="newAimForm" style="display:none">
