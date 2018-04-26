@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<!-- jQuery(mobile) -->
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 <script src="../controllers/user.js"></script>
 <script type="text/javascript" src="../cordova.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- full calendar -->
 <link rel='stylesheet' href='../fullcalendar-3.9.0/fullcalendar.css' />
 <link rel='stylesheet' href='../css/universal.css' />
@@ -15,6 +16,7 @@
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/onsen/2.9.2/js/angular-onsenui.min.js"></script>
 
 <html lang="en">
     <head>
@@ -22,20 +24,28 @@
         <meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=yes">
         <title>HeartStrong</title>
     </head>
-    <!--write vitals controller! -->
-    <body ng-app="userApp" ng-controller="vitalsCtrl">
-        <ons-page>
-            <div class="container-fluid">
-                <div id="nav-placeholder"></div>
 
-                <p style="text-align: center">
-                    <ons-button onclick="showModal()">Show modal</ons-button>
-                </p>
+    <body ng-app="userApp" >
+        <div class="container-fluid">
 
-                <ons-modal direction="up">
+            <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+            <template id="page1.html">
+                <ons-page id="page1" ng-controller="vitalsCtrl">
+                    <div id="nav-placeholder"></div>
+                    <div id='calendar'></div>
+                </ons-page>
+            </template>
+
+            <template id="page2.html">
+                <ons-page id="page2" ng-controller="vitalsCtrl">
+                    <ons-toolbar>
+                        <div class="left"><ons-back-button>Back</ons-back-button></div>
+                        <div class="center"></div>
+                    </ons-toolbar>
                     <div style="text-align: center">
                         <form>
-                            Weight: <input type="text" ng-model="weight">
+                            Weight: <ons-input type="text" ng-model="weight" modifier="underbar"></ons-input>
                             <select ng-model="unit">
                                 <option value="kg">Kg</option>
                                 <option value="lb">Lb</option>
@@ -43,71 +53,10 @@
                             <button type="button" ng-click="submitWeight()">Submit</button>
                         </form>
                     </div>
-                </ons-modal>
+                </ons-page>
+            </template>
 
-                <div id='calendar'></div>
-            </div>
-        </ons-page>
+        </div>
     </body>
-
-    <script>
-        // page is now ready, initialize the calendar...
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-            dayClick: function(date, jsEvent, view) {
-                //                        alert('Clicked on: ' + date.format());
-                //                        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                //                        alert('Current view: ' + view.name);
-                //                        // change the day's background color just for fun
-                //$(this).css('background-color', 'red');
-            }
-        })
-
-        function showModal() {
-            var modal = document.querySelector('ons-modal');
-            modal.show();
-            setTimeout(function() {
-                modal.hide();
-            }, 2000);
-        }
-
-
-        $("#nav-placeholder").load("navbar.html");
-        //
-        //                // Popup Window
-        //                var scrollTop = '';
-        //                var newHeight = '100';
-        //
-        //                $(".popup-trigger").click(function(e) {
-        //                    e.stopPropagation();
-        //                    if(jQuery(window).width() < 767) {
-        //                        $(this).after( $( ".popup" ) );
-        //                        $('.popup').show().addClass('popup-mobile').css('top', 0);
-        //                        $('html, body').animate({
-        //                            scrollTop: $('.popup').offset().top
-        //                        }, 500);
-        //                    } else {
-        //                        $('.popup').removeClass('popup-mobile').css('top', newHeight).toggle();
-        //                    };
-        //                });
-        //
-        //                $(window).bind('scroll', function() {
-        //                    scrollTop = $( window ).scrollTop();
-        //                    newHeight = scrollTop + 100;
-        //                });
-        //
-        //
-        //                $('html').click(function() {
-        //                    $('.popup').hide();
-        //                });
-        //
-        //                $('.popup-btn-close').click(function(e){
-        //                    $('.popup').hide();
-        //                });
-        //
-        //                $('.popup').click(function(e){
-        //                    e.stopPropagation();
-        //                });
-    </script>
 
 </html>

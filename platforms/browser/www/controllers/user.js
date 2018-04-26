@@ -1,4 +1,4 @@
-var app = angular.module('userApp', []);
+var app = angular.module('userApp',['onsen']);
 
 var config = {
     headers : {
@@ -66,40 +66,40 @@ app.controller('userCtrl', function($scope, $http){
 //Listens for changes to input and change value in variable scope
 app.directive('fileModel', ['$parse', function ($parse) {
     return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-        var model = $parse(attrs.fileModel);
-        var modelSetter = model.assign;
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
 
-        element.bind('change', function(){
-            scope.$apply(function(){
-                modelSetter(scope, element[0].files[0]);
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
             });
-        });
-    }
-   };
+        }
+    };
 }]);
 
 //Use when need to do fileUpload
 app.service('fileUpload', ['$http', function ($http) {
     this.uploadFileToUrl = function(file, uploadUrl, name, text, username){
-         var fd = new FormData();
-         fd.append('file', file);
-         fd.append('name', name);
-         fd.append('text', text);
-         fd.append('username', username);
-         $http.post(uploadUrl, fd, {
-             transformRequest: angular.identity,
-             headers: {'Content-Type': undefined,'Process-Data': false}
-         })
-         .success(function(){
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('name', name);
+        fd.append('text', text);
+        fd.append('username', username);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined,'Process-Data': false}
+        })
+            .success(function(){
             console.log("Success");
-         })
-         .error(function(){
+        })
+            .error(function(){
             console.log("Not Success");
-         });
-     }
- }]);
+        });
+    }
+}]);
 
 app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $http, fileUpload) {
 
@@ -167,17 +167,17 @@ app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
     //Get full aim text/ picture to show when name clicked in AimView
     $scope.getAim = function(aimName) {
 
-      var params = {
-          aimTitle: aimName,
-          username: user,
-      };
+        var params = {
+            aimTitle: aimName,
+            username: user,
+        };
 
-      $http.get("http://sonjoseph.website/heartstrong_backend/getFullAim.php", {config, params}).then(function(res){
-          console.log();
-          $scope.switchView('#fullAim');
-          $scope.aimText = res.data;
+        $http.get("http://sonjoseph.website/heartstrong_backend/getFullAim.php", {config, params}).then(function(res){
+            console.log();
+            $scope.switchView('#fullAim');
+            $scope.aimText = res.data;
 
-      });
+        });
 
     }
 
@@ -188,12 +188,35 @@ app.controller('aimsCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
 
 
 app.controller('vitalsCtrl', function($scope, $http){
+    $scope.weight;
+    $scope.unit;
+    
+    document.addEventListener('init', function(event) {
+        var page = event.target;
+        if (page.id === 'page1') {
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                dayClick: function(date, jsEvent, view) {
+                    $scope.date = date.format();
+                    document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: date.format()}});
+                }
+            });
+            $("#nav-placeholder").load("navbar.html");
+        } else if (page.id === 'page2') {
+            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+        }
+    });
+    
     $scope.submitWeight = function(){
-        console.log($scope.unit);
-        console.log($scope.weight);
-//        var data = $.param({
-//
-//        })
+        var data = $.param({
+            weight: $scope.weight,
+            unit: $scope.unit,
+            date: $scope.date,
+            username: localStorage.getItem("user")
+        })
+        $http.post("http://sonjoseph.website/heartstrong_backend/addWeight.php", data, config).then(function(res){
+            console.log(res);
+        });
     }
 });
 
@@ -223,6 +246,7 @@ app.controller('journalCtrl', function($scope, $http){
             journal: $scope.journalInput,
             mood: mood,
         });
+
         $http.post("http://sonjoseph.website/heartstrong_backend/addJournalEntry.php", data, config).then(function(res){
             console.log();
             if(res.data == "Success!"){
